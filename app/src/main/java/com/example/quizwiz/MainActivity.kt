@@ -7,14 +7,18 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.quizwiz.component.Questions
 import com.example.quizwiz.model.Question
 import com.example.quizwiz.screens.QuestionsViewModel
+import com.example.quizwiz.screens.TriviaHome
 import com.example.quizwiz.ui.theme.QuizWizTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,41 +29,15 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             QuizWizTheme {
-//                Scaffold(modifier = Modifier.fillMaxSize()) {
-//                    val viewModel by
-//                    TriviaHome(viewModel = QuestionsViewModel)
-//                }
+                Surface(color = MaterialTheme.colorScheme.background) {
+                    TriviaHome()
+                }
+
             }
         }
     }
 }
 
-@Composable
-fun TriviaHome(viewModel: QuestionsViewModel = hiltViewModel()){
-    Questions(viewModel)
-}
 
- @Composable
- fun Questions(viewModel: QuestionsViewModel) {
-     val questions = viewModel.data.value.data?.toMutableList()
 
-     if (viewModel.data.value.loading == true){
-         Log.d("Loading", "Question..... Loading")
-     }else {
-         Log.d("Result", "Question: Loading STOPPED..")
-         questions?.forEach{questionsItem ->
-             Log.d("Result", "Questions: ${questionsItem.question}")
 
-         }
-//         if (question != null) {
-//             Log.d("SIZE", "Question ${question.size}")
-//         }
-     }
- }
-//
-// @Preview(showBackground = true)
-//@Composable
-//fun GreetingPreview() {
-//    QuizWizTheme {
-//    }
-//}
